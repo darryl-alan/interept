@@ -1,0 +1,26 @@
+<h1 class="text-center">Users</h1>
+<div class='text-center'><%= will_paginate %></div>
+<% @users.each do |user| %>
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+      <div class="panel panel-info">
+        <div class="panel-body text-center">
+          <div class='row'><%= link_to gravatar_for(user), user_path(user) %></div>
+          <div class='row'><%= link_to user.username, user_path(user) %></div>
+          <div class='row'>
+            <small>
+              <%= pluralize(user.reports.count, 'report') if user.reports %>
+            </small>
+          </div>
+          <% if logged_in? && current_user.admin? %>
+            <div class='row'>
+              <%= link_to "Edit", edit_user_path(user), class:"btn btn-warning" %>
+              <%= link_to "Delete", user_path(user), method: :delete, class:"btn btn-danger", data: {confirm: "Are you sure?"} %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class='text-center'><%= will_paginate %></div>

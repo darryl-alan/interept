@@ -1,0 +1,30 @@
+<h2 class="text-center"><%= @report.title %></h2>
+<div class="well col-xs-8 col-xs-offset-2">
+  <% if @report.user %>
+    <div class="row text-center">Created by:</div>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-4">
+        <div class="text-center">
+          <div class='row'><%= link_to gravatar_for(@report.user), user_path(@report.user) %></div>
+          <div class='row'><%= link_to @report.user.username, user_path(@report.user) %></div>
+          <div class='row'>
+            <small>
+              <%= pluralize(@report.user.reports.count, 'report') if @report.user.reports %>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= @report.description %>
+  <% if @report.categories.any? %>
+    <p>Categories: <%= render @report.categories %></p>
+  <% end %>
+</div>
+<div class="col-xs-12 text-center">
+  <% if logged_in? && (current_user == @report.user || current_user.admin?) %>
+    <%= link_to "Edit", edit_report_path(@report), class: "btn btn-xs btn-warning" %>
+    <%= link_to "Delete", report_path(@report), class: "btn btn-xs btn-danger", method: :delete, data: {confirm: "You sure dude?"} %>
+  <% end %>
+  <%= link_to "Back to list", reports_path, class: "btn btn-xs btn-info" %>
+</div>

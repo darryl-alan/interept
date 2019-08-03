@@ -1,0 +1,41 @@
+<% reports.each do |report| %>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= link_to report.title, report_path(report) %>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class='my-3'>
+            <%= truncate(report.description, length: 10) %>
+          </div>
+          <% if report.categories.any? %>
+            <div class='row col-xs-12 my-1'>
+              Categories: <%= render report.categories %>
+            </div>
+          <% end %>
+          <div class='row col-xs-12 my-1'>
+            <small>
+              Created by <%= report.user.username if report.user %>
+              <%= time_ago_in_words(report.created_at) %> ago,
+              last updated <%= time_ago_in_words(report.updated_at) %> ago
+            </small>
+          </div>
+          <% if logged_in? && (current_user == report.user || current_user.admin?) %>
+            <div class="col-xs-12 text-center">
+              <%= link_to "Edit", 
+										edit_report_path(report), 
+										class: "btn btn-xs btn-warning" %>
+              <%= link_to "Delete", report_path(report), 
+										class: "btn btn-xs btn-danger", 
+										method: :delete, 
+										data: {confirm: "You sure dude?"} %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
