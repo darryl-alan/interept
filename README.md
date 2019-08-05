@@ -52,7 +52,7 @@ heroku login
 Follow the instructions to login, and then
 
 ```
-heroku new
+heroku create
 ```
 
 And then
