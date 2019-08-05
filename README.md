@@ -23,12 +23,17 @@ Run bundle install
 bundle install --without production
 ```
 
+Setup database
+
+```
+rails db:migrate
+```
+
 Then start the server
 
 ```
 rails server
 ```
-
 
 ## Running the tests
 
@@ -43,26 +48,29 @@ This was built to be run on Heroku.
 ```
 heroku login
 ```
+
 Follow the instructions to login, and then
 
 ```
 heroku new
 ```
+
 And then
 
 ```
 heroku push origin master
 ```
+
 Finally to migrate the database run
+
 ```
 heroku run rails db:migrate
 ```
 
 ## Built With
 
-* [Ruby on Rails](https://rubyonrails.org/) - The web framework used
-* [Bootstrap](https://getbootstrap.com/) - CSS framework
-
+- [Ruby on Rails](https://rubyonrails.org/) - The web framework used
+- [Bootstrap](https://getbootstrap.com/) - CSS framework
 
 ## License
 
