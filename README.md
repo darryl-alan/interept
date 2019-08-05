@@ -58,7 +58,7 @@ heroku create
 And then
 
 ```
-heroku push origin master
+git push heroku master
 ```
 
 Finally to migrate the database run
